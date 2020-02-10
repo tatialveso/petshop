@@ -15,19 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pets', 'PetsController@index'); 
-Route::get('/pets/create', 'PetsController@create');
-Route::post('/pets/store', 'PetsController@store');
-Route::get('/pets/edit/{id}', 'PetsController@edit');
-Route::patch('/pets/update/{id}', 'PetsController@update');
-Route::delete('/pets/destroy/{id}', 'PetsController@destroy');
+// middleware bloqueia todos os sites que precisam estar logados para acessar
+Route::get('/pets', 'PetsController@index')->middleware('auth:web'); 
+Route::get('/pets/create', 'PetsController@create')->middleware('auth:web'); 
+Route::post('/pets/store', 'PetsController@store')->middleware('auth:web'); 
+Route::get('/pets/edit/{id}', 'PetsController@edit')->middleware('auth:web'); 
+Route::patch('/pets/update/{id}', 'PetsController@update')->middleware('auth:web'); 
+Route::delete('/pets/destroy/{id}', 'PetsController@destroy')->middleware('auth:web'); 
 
-Route::get('/owners', 'OwnersController@index');
-Route::get('/owners/create', 'OwnersController@create');
-Route::post('/owners/store', 'OwnersController@store');
-Route::get('/owners/edit/{id}', 'OwnersController@edit');
-Route::patch('/owners/update/{id}', 'OwnersController@update');
-Route::delete('/owners/destroy/{id}', 'OwnersController@destroy');
+Route::get('/owners', 'OwnersController@index')->middleware('auth:web'); 
+Route::get('/owners/create', 'OwnersController@create')->middleware('auth:web'); 
+Route::post('/owners/store', 'OwnersController@store')->middleware('auth:web'); 
+Route::get('/owners/edit/{id}', 'OwnersController@edit')->middleware('auth:web'); 
+Route::patch('/owners/update/{id}', 'OwnersController@update')->middleware('auth:web'); 
+Route::delete('/owners/destroy/{id}', 'OwnersController@destroy')->middleware('auth:web'); 
 
 Route::auth();
 Auth::routes();
